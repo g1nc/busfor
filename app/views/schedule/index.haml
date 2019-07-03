@@ -1,0 +1,18 @@
+%table.table
+  %tr
+    %th Start station
+    %th Start time
+    %th End station
+    %th End time
+    %th Carrier
+    %th Cost
+    %th Schedule
+
+  - @schedules.each do |schedule|
+    %tr
+      %td= "#{schedule.start_station.city.name} - #{schedule.start_station.name}"
+      %td= schedule.start_time
+      %td= "#{schedule.end_station.city.name} - #{schedule.end_station.name}"
+      %td= schedule.end_time
+      %td= schedule.carrier.name
+      %td= "#{schedule.currency.name} #{schedule.total_cost}"

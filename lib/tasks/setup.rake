@@ -18,16 +18,21 @@ namespace :setup do
         end_station   = Station.find_or_create_by(name: trip[:station_end_name], city: end_city)
         carrier       = Carrier.find_or_create_by(name: trip[:carrier_name])
         currency      = Currency.find_or_create_by(name: trip[:currency])
-        Trip.create(
+
+        schedule = Schedule.find_or_create_by(
           start_station: start_station,
-          start_date:    Date.parse(trip[:start_date]),
-          start_time:    trip[:start_time],
           end_station:   end_station,
-          end_date:      Date.parse(trip[:end_date]),
-          end_time:      trip[:end_time],
           carrier:       carrier,
           total_cost:    trip[:total_cost],
-          currency:      currency
+          currency:      currency,
+          start_time:    trip[:start_time],
+          end_time:      trip[:end_time]
+        )
+
+        Trip.create(
+          schedule:   schedule,
+          start_date: Date.parse(trip[:start_date]),
+          end_date:   Date.parse(trip[:end_date])
         )
       end
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_03_091801) do
+ActiveRecord::Schema.define(version: 2019_07_03_091851) do
 
   create_table "carriers", force: :cascade do |t|
     t.string "name"
@@ -24,6 +24,22 @@ ActiveRecord::Schema.define(version: 2019_07_03_091801) do
     t.string "name"
   end
 
+  create_table "schedules", force: :cascade do |t|
+    t.integer "start_station_id"
+    t.integer "end_station_id"
+    t.integer "carrier_id"
+    t.integer "currency_id"
+    t.string "start_time"
+    t.string "end_time"
+    t.float "total_cost"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["carrier_id"], name: "index_schedules_on_carrier_id"
+    t.index ["currency_id"], name: "index_schedules_on_currency_id"
+    t.index ["end_station_id"], name: "index_schedules_on_end_station_id"
+    t.index ["start_station_id"], name: "index_schedules_on_start_station_id"
+  end
+
   create_table "stations", force: :cascade do |t|
     t.integer "city_id"
     t.string "name"
@@ -31,19 +47,10 @@ ActiveRecord::Schema.define(version: 2019_07_03_091801) do
   end
 
   create_table "trips", force: :cascade do |t|
-    t.integer "start_station_id"
-    t.integer "end_station_id"
+    t.integer "schedule_id"
     t.date "start_date"
-    t.string "start_time"
     t.date "end_date"
-    t.string "end_time"
-    t.integer "carrier_id"
-    t.float "total_cost"
-    t.integer "currency_id"
-    t.index ["carrier_id"], name: "index_trips_on_carrier_id"
-    t.index ["currency_id"], name: "index_trips_on_currency_id"
-    t.index ["end_station_id"], name: "index_trips_on_end_station_id"
-    t.index ["start_station_id"], name: "index_trips_on_start_station_id"
+    t.index ["schedule_id"], name: "index_trips_on_schedule_id"
   end
 
 end
