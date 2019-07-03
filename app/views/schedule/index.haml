@@ -9,6 +9,8 @@
     %th Schedule
 
   - @schedules.each do |schedule|
+    - scheduled_days = schedule_by_days(schedule.trips)
+    - next unless scheduled_days.present?
     %tr
       %td= "#{schedule.start_station.city.name} - #{schedule.start_station.name}"
       %td= schedule.start_time
@@ -16,4 +18,4 @@
       %td= schedule.end_time
       %td= schedule.carrier.name
       %td= "#{schedule.currency.name} #{schedule.total_cost}"
-      %td= schedule.by_days
+      %td= scheduled_days
