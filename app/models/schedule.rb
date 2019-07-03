@@ -4,4 +4,13 @@ class Schedule < ApplicationRecord
   belongs_to :carrier
   belongs_to :currency
   has_many   :trips
+
+  def by_days
+    result = []
+    all_dates = (Trip.min_date..Trip.max_date).group_by(&:wday)
+    all_dates.each do |day, dates|
+      result << day if dates.all? { |date| trips.where(start_date: date).present? }
+    end
+    result
+  end
 end
