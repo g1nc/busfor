@@ -31,10 +31,10 @@ class SchedulePresenter
   end
 
   def trip_min_date
-    @min_date ||= Trip.min_date
+    @trip_min_date ||= Trip.min_date
   end
 
   def trip_max_date
-    @max_date ||= Trip.max_date
+    @trip_max_date ||= Trip.max_date
   end
 end
