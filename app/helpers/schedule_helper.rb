@@ -7,8 +7,7 @@ module ScheduleHelper
 
   private
 
-  def badge_html(day_number = nil)
-    weekday = { 0 => 'пн', 1 => 'вт', 2 => 'ср', 3 => 'чт', 4 => 'пт', 5 => 'сб', 6 => 'вс' }
-    "<span class='badge badge-light'>#{weekday.fetch(day_number, 'eжедневно')}</span>"
+  def badge_html(day_number = 7)
+    badge(%w[пн вт ср чт пт сб вс ежедневно].fetch(day_number), :light)
   end
 end
