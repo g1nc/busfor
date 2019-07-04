@@ -1,19 +1,27 @@
-%table.table
-  %tr
-    %th ID
-    %th Start station
-    %th Start datetime
-    %th End station
-    %th End datetime
-    %th Carrier
-    %th Cost
+.row
+  .col-sm-12
+    %a.btn.btn-success.pull-right{ href: new_trip_path } Add
+  .col-sm-12
+    %table.table
+      %tr
+        %th ID
+        %th Start station
+        %th Start datetime
+        %th End station
+        %th End datetime
+        %th Carrier
+        %th Cost
+        %th
 
-  - @trips.each do |trip|
-    %tr
-      %td= trip.id
-      %td= "#{trip.schedule.start_station.city.name} - #{trip.schedule.start_station.name}"
-      %td= "#{trip.start_date} #{trip.schedule.start_time}"
-      %td= "#{trip.schedule.end_station.city.name} - #{trip.schedule.end_station.name}"
-      %td= "#{trip.end_date} #{trip.schedule.end_time}"
-      %td= trip.schedule.carrier.name
-      %td= "#{trip.schedule.currency.name} #{trip.schedule.total_cost}"
+      - @trips.each do |trip|
+        %tr
+          %td= trip[:id]
+          %td= trip[:start_station]
+          %td= trip[:start_date_time]
+          %td= trip[:end_station]
+          %td= trip[:end_date_time]
+          %td= trip[:carrier]
+          %td= trip[:cost]
+          %th
+            = link_to 'Edit', edit_trip_path(trip[:id])
+            = link_to 'Delete', trip_path(trip[:id]), method: :delete, data: { confirm: 'Are you sure?' }

@@ -19,6 +19,7 @@ module Busfor
     # the framework and any gems in your application.
 
     config.autoload_paths << Rails.root.join('app/presenters')
+    config.autoload_paths << Rails.root.join('app/services')
     config.autoload_paths << Rails.root.join('app/queries')
   end
 end

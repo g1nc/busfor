@@ -1,0 +1,44 @@
+.row
+  .col-sm-6
+    .form-group
+      %label{:for => "startStation"} Start station
+      %select#startCity.form-control{ name: :start_station }
+        - @stations.each do |station|
+          %option{ value: station.id, selected: @trip&.schedule&.start_station_id == station.id }= "#{station.city.name} - #{station.name}"
+    .form-group
+      %label{:for => "startDate"} Start date
+      %input.form-control.datepicker#startDate{ type: :text, name: :start_date, autocomplete: 'off', value: @trip&.start_date }
+    .form-group
+      %label{:for => "startTime"} Start time
+      %input.form-control#startTime{ type: :text, name: :start_time, value: @trip&.schedule&.start_time }
+
+  .col-sm-6
+    .form-group
+      %label{:for => "endCity"} End station
+      %select#endCity.form-control{ name: :end_station }
+        - @stations.each do |station|
+          %option{ value: station.id, selected: @trip&.schedule&.end_station_id == station.id }= "#{station.city.name} - #{station.name}"
+    .form-group
+      %label{:for => "endDate"} End date
+      %input.form-control.datepicker#endDate{ type: :text, name: :end_date, autocomplete: 'off', value: @trip&.end_date }
+    .form-group
+      %label{:for => "endTime"} End time
+      %input.form-control#endTime{ type: :text, name: :end_time, value: @trip&.schedule&.end_time }
+
+  .col-sm-12
+    .form-group
+      %label{:for => "carrier"} Carrier
+      %select#carrier.form-control{ name: :carrier }
+        - @carriers.each do |carrier|
+          %option{ value: carrier.id, selected: @trip&.schedule&.carrier_id == carrier.id }= carrier.name
+    .form-group
+      %label{:for => "cost"} Cost
+      %input.form-control#cost{ type: :text, name: :cost, value: @trip&.schedule&.total_cost }
+    .form-group
+      %label{:for => "currency"} Currency
+      %select#currency.form-control{ name: :currency }
+        - @currencies.each do |currency|
+          %option{ value: currency.id, selected: @trip&.schedule&.currency_id == currency.id }= currency.name
+
+  .col-sm-12
+    %button.btn.btn-primary{:type => "submit"} Submit
