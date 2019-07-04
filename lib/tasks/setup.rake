@@ -5,12 +5,12 @@ require 'zlib'
 
 namespace :setup do
   task initialize_data: :environment do
-    tar_extract = Gem::Package::TarReader.new(Zlib::GzipReader.open(Rails.root.join('tmp/trips.tar.gz')))
+    tar_extract = Gem::Package::TarReader.new(Zlib::GzipReader.open(Rails.root.join('trips.tar.gz')))
     tar_extract.rewind
     tar_extract.each do |entry|
       next unless entry.file?
 
-      trips = YAML.safe_load(entry.read)
+      trips = YAML.load(entry.read)
       trips.each do |trip|
         start_city    = City.find_or_create_by(name: trip[:start_city_name])
         end_city      = City.find_or_create_by(name: trip[:end_city_name])
