@@ -1,12 +1,18 @@
 module ScheduleHelper
-  def schedule_by_days(trips)
+  def schedule_by_days(trips_dates)
     result = []
-    @min_date ||= Trip.min_date
-    @max_date ||= Trip.max_date
-    all_dates = (@min_date..@max_date).group_by(&:wday)
+    all_dates = (trip_min_date..trip_max_date).group_by(&:wday)
     all_dates.each do |day, dates|
-      result << day if dates.all? { |date| trips.to_a.select { |trip| trip[:start_date] == date }.present? }
+      result << day if (dates & trips_dates).count == all_dates[day].count
     end
     result
+  end
+
+  def trip_min_date
+    @min_date ||= Trip.min_date
+  end
+
+  def trip_max_date
+    @max_date ||= Trip.max_date
   end
 end

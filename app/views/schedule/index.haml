@@ -9,7 +9,7 @@
     %th Schedule
 
   - @schedules.each do |schedule|
-    - scheduled_days = schedule_by_days(schedule.trips)
+    - scheduled_days = schedule_by_days(schedule.trips.pluck(:start_date))
     - next unless scheduled_days.present?
     %tr
       %td= "#{schedule.start_station.city.name} - #{schedule.start_station.name}"
