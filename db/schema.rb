@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,47 +12,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_03_091851) do
-
-  create_table "carriers", force: :cascade do |t|
-    t.string "name"
+ActiveRecord::Schema.define(version: 20_190_703_091_851) do
+  create_table 'carriers', force: :cascade do |t|
+    t.string 'name'
   end
 
-  create_table "cities", force: :cascade do |t|
-    t.string "name"
+  create_table 'cities', force: :cascade do |t|
+    t.string 'name'
   end
 
-  create_table "currencies", force: :cascade do |t|
-    t.string "name"
+  create_table 'currencies', force: :cascade do |t|
+    t.string 'name'
   end
 
-  create_table "schedules", force: :cascade do |t|
-    t.integer "start_station_id"
-    t.integer "end_station_id"
-    t.integer "carrier_id"
-    t.integer "currency_id"
-    t.string "start_time"
-    t.string "end_time"
-    t.float "total_cost"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["carrier_id"], name: "index_schedules_on_carrier_id"
-    t.index ["currency_id"], name: "index_schedules_on_currency_id"
-    t.index ["end_station_id"], name: "index_schedules_on_end_station_id"
-    t.index ["start_station_id"], name: "index_schedules_on_start_station_id"
+  create_table 'schedules', force: :cascade do |t|
+    t.integer 'start_station_id'
+    t.integer 'end_station_id'
+    t.integer 'carrier_id'
+    t.integer 'currency_id'
+    t.string 'start_time'
+    t.string 'end_time'
+    t.float 'total_cost'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['carrier_id'], name: 'index_schedules_on_carrier_id'
+    t.index ['currency_id'], name: 'index_schedules_on_currency_id'
+    t.index ['end_station_id'], name: 'index_schedules_on_end_station_id'
+    t.index ['start_station_id'], name: 'index_schedules_on_start_station_id'
   end
 
-  create_table "stations", force: :cascade do |t|
-    t.integer "city_id"
-    t.string "name"
-    t.index ["city_id"], name: "index_stations_on_city_id"
+  create_table 'stations', force: :cascade do |t|
+    t.integer 'city_id'
+    t.string 'name'
+    t.index ['city_id'], name: 'index_stations_on_city_id'
   end
 
-  create_table "trips", force: :cascade do |t|
-    t.integer "schedule_id"
-    t.date "start_date"
-    t.date "end_date"
-    t.index ["schedule_id"], name: "index_trips_on_schedule_id"
+  create_table 'trips', force: :cascade do |t|
+    t.integer 'schedule_id'
+    t.date 'start_date'
+    t.date 'end_date'
+    t.index ['schedule_id'], name: 'index_trips_on_schedule_id'
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SchedulePresenter
   def initialize(schedules)
     @schedules = schedules
@@ -6,12 +8,12 @@ class SchedulePresenter
   def invoke
     @schedules.map do |schedule|
       {
-        start_station:    "#{schedule.start_station.city.name} - #{schedule.start_station.name}",
-        start_time:       schedule.start_time,
-        end_station:      "#{schedule.end_station.city.name} - #{schedule.end_station.name}",
-        end_time:         schedule.end_time,
-        carrier:          schedule.carrier.name,
-        cost:             "#{schedule.currency.name} #{schedule.total_cost}",
+        start_station: "#{schedule.start_station.city.name} - #{schedule.start_station.name}",
+        start_time: schedule.start_time,
+        end_station: "#{schedule.end_station.city.name} - #{schedule.end_station.name}",
+        end_time: schedule.end_time,
+        carrier: schedule.carrier.name,
+        cost: "#{schedule.currency.name} #{schedule.total_cost}",
         schedule_by_days: schedule_by_days(schedule.trips.pluck(:start_date)).sort
       }
     end

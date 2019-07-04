@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ScheduleQuery
   def initialize(start_city: nil, end_city: nil)
     @start_city = start_city

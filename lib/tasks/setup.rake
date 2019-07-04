@@ -10,7 +10,7 @@ namespace :setup do
     tar_extract.each do |entry|
       next unless entry.file?
 
-      trips = YAML.load(entry.read)
+      trips = YAML.safe_load(entry.read)
       trips.each do |trip|
         start_city    = City.find_or_create_by(name: trip[:start_city_name])
         end_city      = City.find_or_create_by(name: trip[:end_city_name])
@@ -21,18 +21,18 @@ namespace :setup do
 
         schedule = Schedule.find_or_create_by(
           start_station: start_station,
-          end_station:   end_station,
-          carrier:       carrier,
-          total_cost:    trip[:total_cost],
-          currency:      currency,
-          start_time:    trip[:start_time],
-          end_time:      trip[:end_time]
+          end_station: end_station,
+          carrier: carrier,
+          total_cost: trip[:total_cost],
+          currency: currency,
+          start_time: trip[:start_time],
+          end_time: trip[:end_time]
         )
 
         Trip.create(
-          schedule:   schedule,
+          schedule: schedule,
           start_date: Date.parse(trip[:start_date]),
-          end_date:   Date.parse(trip[:end_date])
+          end_date: Date.parse(trip[:end_date])
         )
       end
     end

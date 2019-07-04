@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ScheduleHelper
   def schedule_badges(schedule_by_days)
     return badge_html.html_safe if schedule_by_days.count == 7
