@@ -12,7 +12,7 @@ class SchedulePresenter
         end_time:         schedule.end_time,
         carrier:          schedule.carrier.name,
         cost:             "#{schedule.currency.name} #{schedule.total_cost}",
-        schedule_by_days: schedule_by_days(schedule.trips.pluck(:start_date))
+        schedule_by_days: schedule_by_days(schedule.trips.pluck(:start_date)).sort
       }
     end
   end

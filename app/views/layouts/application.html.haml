@@ -8,4 +8,11 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    = yield
+    = nav_bar fixed: :top, brand: "Schedule" do
+      = menu_group do
+        = menu_item "Trips", trips_path
+
+    %div.container-fluid
+      %div.row
+        %div.col-sm-10.col-sm-offset-1
+          = yield
