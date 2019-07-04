@@ -1,20 +1,39 @@
-%table.table
-  %tr
-    %th Start station
-    %th Start time
-    %th End station
-    %th End time
-    %th Carrier
-    %th Cost
-    %th Schedule
+.row
+  .col-sm-12.text-center
+    %form.form-inline
+      .form-group
+        %label{:for => "startCity"} Start city
+        %select#startCity.form-control{ name: :start_city }
+          - City.all.each do |city|
+            %option{ value: city.id, selected: params['start_city'].to_i == city.id }= city.name
+      .form-group
+        %label{:for => "endCity"} End city
+        %select#endCity.form-control{ name: :end_city }
+          - City.all.each do |city|
+            %option{ value: city.id, selected: params['end_city'].to_i == city.id }= city.name
+      %button.btn.btn-primary{ type: :submit } Submit
 
-  - @schedules.each do |schedule|
-    - next unless schedule[:schedule_by_days].present?
-    %tr
-      %td= schedule[:start_station]
-      %td= schedule[:start_time]
-      %td= schedule[:end_station]
-      %td= schedule[:end_time]
-      %td= schedule[:carrier]
-      %td= schedule[:cost]
-      %td= schedule_badges(schedule[:schedule_by_days])
+%br
+
+.row
+  .col-sm-12
+    %table.table
+      %tr
+        %th Start station
+        %th Start time
+        %th End station
+        %th End time
+        %th Carrier
+        %th Cost
+        %th Schedule
+
+      - @schedules.each do |schedule|
+        - next unless schedule[:schedule_by_days].present?
+        %tr
+          %td= schedule[:start_station]
+          %td= schedule[:start_time]
+          %td= schedule[:end_station]
+          %td= schedule[:end_time]
+          %td= schedule[:carrier]
+          %td= schedule[:cost]
+          %td= schedule_badges(schedule[:schedule_by_days])

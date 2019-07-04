@@ -8,7 +8,7 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    = nav_bar fixed: :top, brand: "Schedule" do
+    = nav_bar brand: "Schedule" do
       = menu_group do
         = menu_item "Trips", trips_path
 
